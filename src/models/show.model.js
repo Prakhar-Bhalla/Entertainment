@@ -7,6 +7,6 @@ const showSchema = new Schema({
     screen : {type: Schema.Types.ObjectId, ref: "screen", required: true}
 }, {versionKey: false, timestamps: true});
 
-const Show = model("user", showSchema);
+const Show = model("show", showSchema);
 
 module.exports = Show;
