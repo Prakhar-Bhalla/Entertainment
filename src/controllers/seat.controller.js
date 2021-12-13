@@ -13,4 +13,13 @@ router.post("/", async(req, res) => {
     }
 });
 
+router.get("/show/:id", async(req, res) => {
+    try {
+        const seats = await Seat.find({show: req.params.id}).lean().exec();
+        res.status(201).send({seats});
+    } catch(e) {
+        res.status(500).send({status: "failed", message: e.message});
+    }
+})
+
 module.exports = router;

@@ -13,4 +13,13 @@ router.post("/", async(req, res) => {
     }
 });
 
+router.get("/movie/:id", async(req, res) => {
+    try {
+        const shows = await Show.find({movie: req.params.id}).lean().exec();
+        res.status(201).send({shows});
+    } catch(e) {
+        res.status(500).send({status: "failed", message: e.message});
+    }
+})
+
 module.exports = router;

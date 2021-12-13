@@ -23,4 +23,16 @@ router.post("/", authenticate, upload.single("image_url"), async(req, res) => {
     }
 })
 
+router.get("/:actor", async(req, res) => {
+    try {
+        const movies = await Show.find().lean().exec();
+        const reqMovies = movies.filter((m) => {
+            return m.actors.includes(req.params.actor);
+        })
+        res.status(201).send({reqMovies});
+    } catch(e) {
+        res.status(500).send({status: "failed", message: e.message});
+    }
+})
+
 module.exports = router;
