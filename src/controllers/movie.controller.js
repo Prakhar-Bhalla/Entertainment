@@ -25,9 +25,9 @@ router.post("/", authenticate, upload.single("image_url"), async(req, res) => {
 
 router.get("/:actor", async(req, res) => {
     try {
-        const movies = await Show.find().lean().exec();
+        const movies = await Movie.find().lean().exec();
         const reqMovies = movies.filter((m) => {
-            return m.actors.includes(req.params.actor);
+            return m.actors[0].includes(req.params.actor);
         })
         res.status(201).send({reqMovies});
     } catch(e) {
